@@ -16,7 +16,7 @@ fi
 # Extract file name from URL
 FILENAME=$(basename "$DOWNLOAD_URL")
 
-# Download the .deb file
+# Download the zip file
 echo "Downloading $FILENAME..."
 wget -q "$DOWNLOAD_URL" -O "$FILENAME"
 
@@ -28,9 +28,27 @@ fi
 
 echo "Download completed: $FILENAME"
 
+# Extract the zip file
+echo "Extracting $FILENAME..."
+unzip -q "$FILENAME" -d extracted_files
+
+# Check if extraction was successful
+if [ $? -ne 0 ]; then
+    echo "Failed to extract the zip file."
+    exit 1
+fi
+
+# Find the .deb file in the extracted files
+DEB_FILE=$(find extracted_files -name "*.deb" | head -n 1)
+
+if [ -z "$DEB_FILE" ]; then
+    echo "No .deb file found in the archive."
+    exit 1
+fi
+
 # Install the .deb file using dpkg
-echo "Installing $FILENAME..."
-dpkg -i "$FILENAME"
+echo "Installing $DEB_FILE..."
+dpkg -i "$DEB_FILE"
 
 # Check if installation was successful
 if [ $? -ne 0 ]; then
@@ -42,4 +60,5 @@ echo "Installation complete!"
 
 # Cleanup (optional)
 rm "$FILENAME"
+rm -r extracted_files
 

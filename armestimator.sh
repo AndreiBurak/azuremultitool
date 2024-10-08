@@ -41,5 +41,5 @@ fi
 echo "Installation complete!"
 
 # Cleanup (optional)
-# rm "$FILENAME"
+rm "$FILENAME"
 

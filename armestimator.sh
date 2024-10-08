@@ -30,7 +30,7 @@ echo "Download completed: $FILENAME"
 
 # Install the .deb file using dpkg
 echo "Installing $FILENAME..."
-sudo dpkg -i "$FILENAME"
+dpkg -i "$FILENAME"
 
 # Check if installation was successful
 if [ $? -ne 0 ]; then

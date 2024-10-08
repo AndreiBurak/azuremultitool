@@ -2,7 +2,7 @@
 
 # Define repository and file criteria
 REPO="TheCloudTheory/arm-estimator"
-ARCH="linux-64"
+ARCH="linux-x64"
 
 # Fetch the latest release URL for the specified architecture
 DOWNLOAD_URL=$(curl -s https://api.github.com/repos/$REPO/releases/latest | grep "browser_download_url.*$ARCH" | cut -d '"' -f 4)

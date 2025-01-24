@@ -17,8 +17,8 @@ RUN ./powershell.sh && \
     ./azcli.sh && \
     pwsh -c "Install-Module -Name Az -Repository PSGallery -Force" && \
     az extension add --name azure-devops
-RUN apt clean autoclean && \
-    apt autoremove --yes && \
+RUN apt-get clean autoclean && \
+    apt-get autoremove --yes && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
     rm -f armestimator.sh && \
     rm -f powershell.sh && \

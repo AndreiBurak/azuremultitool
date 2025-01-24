@@ -1,15 +1,16 @@
-﻿FROM ubuntu:22.04
+FROM ubuntu:22.04
 RUN apt-get update --fix-missing && \
     apt-get install -y --no-install-recommends \
-    curl \
-    wget \
-    git \
-    apt-transport-https \
-    ca-certificates \
-    gnupg \
-    lsb-release \
-    unzip \
-    software-properties-common
+    curl=7.81.0 \
+    wget=1.21.2 \
+    git=2.34.1 \
+    apt-transport-https=2.4.13 \
+    ca-certificates=6.8.0 \
+    gnupg=2.2.27 \
+    lsb-release=11.1 \
+    unzip=0.7-3 \
+    software-properties-common=0.99.22.9 && \
+    rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY /scripts .
 RUN ./powershell.sh && \
@@ -19,9 +20,10 @@ RUN ./powershell.sh && \
     az extension add --name azure-devops
 RUN apt-get clean autoclean && \
     apt-get autoremove --yes && \
-    rm -rf /var/lib/{apt,dpkg,cache,log}/ && \
-    rm -f armestimator.sh && \
-    rm -f powershell.sh && \
-    rm -f azcli.sh
-LABEL Name=AzureMultiTool
-LABEL Version=0.0.1
+    rm -f ./powershell.sh && \
+    rm -f ./armestimator.sh && \
+    rm -f ./azcli.sh && \
+    rm -rf /var/lib/apt/ && \
+    rm -rf /var/lib/dpkg/ && \
+    rm -rf /var/lib/cache/ && \
+    rm -rf /var/lib/log/

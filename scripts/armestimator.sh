@@ -9,8 +9,8 @@ DOWNLOAD_URL=$(curl -s https://api.github.com/repos/$REPO/releases/latest | grep
 
 # Check if the download URL was found
 if [ -z "$DOWNLOAD_URL" ]; then
-    echo "No download URL found for $ARCH architecture."
-    exit 1
+	echo "No download URL found for $ARCH architecture."
+	exit 1
 fi
 
 # Extract file name from URL
@@ -22,8 +22,8 @@ wget -q "$DOWNLOAD_URL" -O "$FILENAME"
 
 # Check if download was successful
 if [ $? -ne 0 ]; then
-    echo "Failed to download the file."
-    exit 1
+	echo "Failed to download the file."
+	exit 1
 fi
 
 echo "Download completed: $FILENAME"
@@ -34,8 +34,8 @@ unzip -q "$FILENAME" -d /usr/local/bin
 
 # Check if extraction was successful
 if [ $? -ne 0 ]; then
-    echo "Failed to extract the zip file."
-    exit 1
+	echo "Failed to extract the zip file."
+	exit 1
 fi
 chmod +x /usr/local/bin/azure-cost-estimator
 # Cleanup (optional)

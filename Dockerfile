@@ -1,5 +1,6 @@
 ﻿FROM ubuntu:22.04
-RUN apt-get update &&  apt-get install -y \
+RUN apt-get update --fix-missing && \
+    apt-get install -y --no-install-recommends \
     curl \
     wget \
     git \
@@ -13,9 +14,9 @@ WORKDIR /app
 COPY /scripts .
 RUN ./powershell.sh && \
     ./armestimator.sh && \
-    ./azcli.sh
-RUN pwsh -c "Install-Module -Name Az -Repository PSGallery -Force"
-RUN az extension add --name azure-devops
+    ./azcli.sh && \
+    pwsh -c "Install-Module -Name Az -Repository PSGallery -Force" && \
+    az extension add --name azure-devops
 RUN apt clean autoclean && \
     apt autoremove --yes && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/ && \

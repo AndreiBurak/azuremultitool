@@ -19,7 +19,7 @@ FILENAME=$(basename "$DOWNLOAD_URL")
 # Download the zip file
 echo "Downloading $FILENAME..."
 # Check if wget is installed
-if ! command -v wget &> /dev/null; then
+if ! command -v wget &>/dev/null; then
 	echo "wget could not be found. Please install wget and try again."
 	exit 1
 fi

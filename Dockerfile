@@ -1,5 +1,5 @@
 ﻿FROM ubuntu:22.04
-RUN apt update &&  apt install -y \
+RUN apt-get update &&  apt-get install -y \
     curl \
     wget \
     git \
@@ -9,6 +9,7 @@ RUN apt update &&  apt install -y \
     lsb-release \
     unzip \
     software-properties-common
+WORKDIR /app
 COPY /scripts .
 RUN ./powershell.sh && \
     ./armestimator.sh && \
@@ -21,6 +22,5 @@ RUN apt clean autoclean && \
     rm -f armestimator.sh && \
     rm -f powershell.sh && \
     rm -f azcli.sh
-WORKDIR /home
 LABEL Name=AzureMultiTool
 LABEL Version=0.0.1

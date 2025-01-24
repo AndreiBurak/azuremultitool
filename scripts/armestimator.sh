@@ -30,35 +30,13 @@ echo "Download completed: $FILENAME"
 
 # Extract the zip file
 echo "Extracting $FILENAME..."
-unzip -q "$FILENAME" -d extracted_files
+unzip -q "$FILENAME" -d /usr/local/bin
 
 # Check if extraction was successful
 if [ $? -ne 0 ]; then
     echo "Failed to extract the zip file."
     exit 1
 fi
-
-# Find the .deb file in the extracted files
-DEB_FILE=$(find extracted_files -name "*.deb" | head -n 1)
-
-if [ -z "$DEB_FILE" ]; then
-    echo "No .deb file found in the archive."
-    exit 1
-fi
-
-# Install the .deb file using dpkg
-echo "Installing $DEB_FILE..."
-dpkg -i "$DEB_FILE"
-
-# Check if installation was successful
-if [ $? -ne 0 ]; then
-    echo "Failed to install the .deb package."
-    exit 1
-fi
-
-echo "Installation complete!"
-
+chmod +x /usr/local/bin/azure-cost-estimator
 # Cleanup (optional)
 rm "$FILENAME"
-rm -r extracted_files
-

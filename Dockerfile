@@ -7,7 +7,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && apt-get install -y --no-install-recommends curl wget git apt-transport-https \
     ca-certificates gnupg lsb-release unzip software-properties-common \
     && ./powershell.sh \
-    && ./armestimator.sh \
     && ./azcli.sh \
     && ./bicep.sh \
     && pwsh -c "Install-Module -Name Az -Repository PSGallery -Force" \

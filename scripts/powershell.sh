@@ -37,4 +37,5 @@ if ! apt-get install -y powershell; then
 	exit 1
 fi
 
+pwsh --version
 echo "PowerShell installation completed successfully"

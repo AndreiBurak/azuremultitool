@@ -64,6 +64,8 @@ main() {
 	setup_gpg_key
 	setup_repository
 	install_azure_cli
+	az self-test
+	az --version
 	echo "Azure CLI installation completed successfully"
 }
 
